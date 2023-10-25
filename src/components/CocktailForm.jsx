@@ -133,18 +133,18 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
       return false;
     };
 
-    if (!author || !nameCocktail || !glas || !preparation || !ice || !description || !ingredients) {
+    if (!author || !nameCocktail || !glas || !preparation || !ice || !description || ingredients.some(item => !item.ingredient || !item.amount)) {
       setHesErrorAuthor(checkError(author, 'Автор'));
       setHesErrorNameCocktail(checkError(nameCocktail));
       setHesErrorGlas(checkError(glas, 'Посуд'));
       setHesErrorPreparation(checkError(preparation, 'Приготування'));
       setHesErrorIce(checkError(ice, 'Лід'));
+
       setHesErrorIngredients(() => {
-        if (!ingredients.ingredient || !ingredients.amount) {
-          return true;
-        }
-        return false;
+        const hasEmptyValue = ingredients.some(item => item.ingredient === '' || item.amount === '');
+        return hasEmptyValue;
       });
+
       setHesErrorDescription(checkError(description));
       return;
     }
