@@ -46,7 +46,6 @@
 }
 .btn_dell-coctail {
   margin-top: 30px;
-  // margin: 0 auto;
 align-self: center;
   width: 170px;
   height: 30px;
@@ -56,6 +55,7 @@ details summary::-webkit-details-marker {
   cursor: pointer;
 }
 details {
+  list-style-type: none;
   cursor: pointer;
 }
 
