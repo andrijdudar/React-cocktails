@@ -40,16 +40,25 @@
   color: white;
   cursor: pointer;
 }
+.btn_container {
+  display: flex;
+  justify-content: center;
+}
 .btn_dell-coctail {
   margin-top: 30px;
+  // margin: 0 auto;
 align-self: center;
   width: 170px;
   height: 30px;
 }
-
-summary {
+details summary::-webkit-details-marker {
+  display: none;
   cursor: pointer;
 }
+details {
+  cursor: pointer;
+}
+
 ol {
   color: yellowgreen;
 }
