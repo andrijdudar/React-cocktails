@@ -10,19 +10,19 @@ import cn from 'classnames';
 export function CocktailForm({ cocktailList, setCocktailList }) {
 
   // #region  state
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState('Автор');
   const [hesErrorAuthor, setHesErrorAuthor] = useState(false);
 
   const [nameCocktail, setNameCocktail] = useState('');
   const [hesErrorNameCocktail, setHesErrorNameCocktail] = useState(false);
 
-  const [glas, setGlas] = useState('');
+  const [glas, setGlas] = useState('Посуд');
   const [hesErrorGlas, setHesErrorGlas] = useState(false);
 
-  const [preparation, setPreparation] = useState('');
+  const [preparation, setPreparation] = useState('Приготування');
   const [hesErrorPreparation, setHesErrorPreparation] = useState(false);
 
-  const [ice, setIce] = useState('');
+  const [ice, setIce] = useState('Лід');
   const [hesErrorIce, setHesErrorIce] = useState(false);
 
   const [ingredients, setIngredients] = useState([{ ingredient: '', amount: '' }]);
@@ -105,11 +105,11 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   };
 
   const reset = () => {
-    setAuthor('');
+    setAuthor('Автор');
     setNameCocktail('');
-    setGlas('');
-    setPreparation('');
-    setIce('');
+    setGlas('Посуд');
+    setPreparation('Приготування');
+    setIce('Лід');
     setIngredients([{ ingredient: '', amount: '' }]);
     setDescription('');
 
@@ -168,14 +168,14 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
     -direction-column'
     >
       {/* Автор */}
-      <div class={cn("control has-icons-left",
+      <div className={cn("control has-icons-left",
         { 'is-danger': hesErrorAuthor })}>
-        <div class="select is-medium is-rounded ">
+        <div className="select is-medium is-rounded ">
           <select
             value={author}
             name='Author'
             onChange={handleAuthorChange}>
-            <option selected >Автор</option>
+            <option disabled >Автор</option>
             <option>Плотніков Євген</option>
             <option>Дудар Андрій</option>
             <option>Пазяк Мар'ян</option>
@@ -184,22 +184,22 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
             <p className='eror'>&#8593;! Автора не вибрано !&#8593;</p>
           )}
         </div>
-        <span class="icon is-medium is-left">
-          <i class="fas fa-user"></i>
+        <span className="icon is-medium is-left">
+          <i className="fas fa-user"></i>
         </span>
       </div>
 
 
       {/* Назва коктейля, посуд, Приготування, Лід */}
-      <div class="control field is-flex is-flex-direction-column ">
+      <div className="control field is-flex is-flex-direction-column ">
         <div>
-          <label class="label has-text-white"><p className='title name-cocktail-title'>Назва Коктейля</p></label>
-          <div class={cn("control",
+          <label className="label has-text-white"><p className='title name-cocktail-title'>Назва Коктейля</p></label>
+          <div className={cn("control",
             { 'is-danger': hesErrorNameCocktail })}>
             <input
               value={nameCocktail}
               name='NameCocktail'
-              class="input name-cocktail is-rounded"
+              className="input name-cocktail is-rounded"
               type="text"
               placeholder="Negroni"
               onChange={handleNameCocktailChange}
@@ -219,7 +219,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
               name='Glas'
               onChange={handleGlasChange}
             >
-              <option selected >Посуд</option>
+              <option disabled>Посуд</option>
               <option>Олд Фешн</option>
               <option>Шале</option>
               <option>Хайбол</option>
@@ -242,7 +242,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
           { 'is-danger': hesErrorPreparation })}>
           <div className="select  is-medium is-rounded">
             <select value={preparation} name='Preparation ' onChange={handlePreparationChange}>
-              <option selected >Приготування</option>
+              <option disabled >Приготування</option>
               <option>Шейк</option>
               <option>Стір</option>
               <option>Білд</option>
@@ -262,7 +262,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
           { 'is-danger': hesErrorIce })}>
           <div className="select is-rounded is-medium">
             <select value={ice} name='Ice' onChange={handleIceChange}>
-              <option selected >Лід</option>
+              <option disabled >Лід</option>
               <option>Кубик</option>
               <option>Глиба</option>
               <option>Без льоду</option>
@@ -329,7 +329,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
 
       {/* Кнопка додавання  інпуту */}
       <div className='btn-container'>
-        <button class="btn btn_add" onClick={addInput}>
+        <button className="btn btn_add" onClick={addInput}>
           +
         </button>
       </div>
@@ -340,7 +340,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
         <textarea
           value={description}
           name='Description'
-          class={cn("textarea is-large",
+          className={cn("textarea is-large",
             { 'is-danger': hesErrorDescription })}
           placeholder="Опис коктейля"
           onChange={handleDescriptionChange}
@@ -351,19 +351,19 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
       </div>
 
       {/* Кнопки готово і скасувати */}
-      <div class="btn-container">
-        <div class="control">
+      <div className="btn-container">
+        <div className="control">
           <button
             type='submit'
-            class="btn_done btn_add"
+            className="btn_done btn_add"
             onClick={hendleSubmit}
           >
             Готово
           </button>
         </div>
 
-        <div class="control">
-          <button type='reset' class="btn_cencel btn_dell">
+        <div className="control">
+          <button type='reset' className="btn_cencel btn_dell">
             Скасувати
           </button>
         </div>

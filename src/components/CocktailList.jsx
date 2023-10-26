@@ -10,18 +10,18 @@ export function CocktailsList({ cocktailList, onDeleteCocktail }) {
         {cocktailList.map(cocktail => (
           <li key={cocktail.id} className='coctailList'>
             <details className='btns coctailList__items'>
-              <summary className='is-flex'>
-                <h3 className='coctailList__item coctail_name'>{cocktail.nameCocktail}</h3>
+              <summary className='is-flex is-justify-content-center'>
+                <h3 className='coctailList__item coctail_name'>{cocktail.cocktail_name}</h3>
                 {/* <h3 className='coctailList__item'>&nbsp; &#8680; &nbsp;{cocktail.user}</h3> */}
               </summary>
               <ul>
                 <li className='is-flex is-justify-content-space-between	' style={{ marginTop: '20px' }}>
-                  <div>Автор </div>
-                  <div>{cocktail.user}</div>
+                  <div>id </div>
+                  <div>{cocktail.id}</div>
                 </li>
                 <hr />
 
-                <li className='is-flex is-justify-content-space-between'>
+                {/* <li className='is-flex is-justify-content-space-between'>
                   <div>Приготування&nbsp;</div>
                   <div>{cocktail.cocktailPreparationMethod}</div>
                 </li>
@@ -40,7 +40,7 @@ export function CocktailsList({ cocktailList, onDeleteCocktail }) {
                   <div>{cocktail.ice}</div>
                 </li>
 
-                <hr />
+                <hr /> */}
 
                 <li className='is-flex is-justify-content-space-between	'>
                   Інгредієнти:
@@ -50,16 +50,16 @@ export function CocktailsList({ cocktailList, onDeleteCocktail }) {
                   <div>
                     <li key={ingredient.ingredient} className='is-flex is-justify-content-space-between	'>
                       <div>{ingredient.ingredient}</div>
-                      <div>{ingredient.amount} мл</div>
+                      <div>{ingredient.numberOfMilliliters} мл</div>
                     </li>
                   </div>
                 ))}
-                <hr />
-                <li className='is-flex is-justify-content-space-between	'>
+                {/* <hr /> */}
+                {/* <li className='is-flex is-justify-content-space-between	'>
                   Опис:
                   <br />
                   {cocktail.description}
-                </li>
+                </li> */}
                 <div className="btn_container">
                   <button
                     type="button"
