@@ -102,11 +102,12 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   //#endregion
 
   const makeCocktail = () => {
+    console.log(photo);
     const cocktail = {
       "id": cocktailList.length + 1,
       "user": author,
       "nameCocktail": nameCocktail,
-      "img": URL.createObjectURL(photo),
+      "img": photo,
       "glass": glas,
       "cocktailPreparationMethod": preparation,
       "ice": ice,
