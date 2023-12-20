@@ -15,7 +15,7 @@ export function CocktailsList({ cocktailList, onDeleteCocktail }) {
 
                     <h3>{cocktail.cocktail_name || cocktail.nameCocktail}</h3>
                   <img src={typeof cocktail.img === "string" ? cocktail.img : URL.createObjectURL(cocktail.img) } alt={cocktail.nameCocktail} />
-                  {/* <img src={URL.createObjectURL(cocktail.img) ||cocktail.img} alt={cocktail.nameCocktail} /> */}
+
                 </div>
                 {/* <h3 className='coctailList__item'>&nbsp; &#8680; &nbsp;{cocktail.user}</h3> */}
               </summary>
