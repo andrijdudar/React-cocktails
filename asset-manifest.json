@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/React-cocktails/static/css/main.db35d3f1.css",
-    "main.js": "/React-cocktails/static/js/main.2e035f0c.js",
+    "main.css": "/React-cocktails/static/css/main.be61c9d6.css",
+    "main.js": "/React-cocktails/static/js/main.4d10abf0.js",
     "static/media/fa-solid-900.ttf": "/React-cocktails/static/media/fa-solid-900.d75e3fd1eb12e9bd6655.ttf",
     "static/media/fa-brands-400.ttf": "/React-cocktails/static/media/fa-brands-400.016b4a6cdced82ab3aa1.ttf",
     "static/media/fa-solid-900.woff2": "/React-cocktails/static/media/fa-solid-900.b6879d41b0852f01ed5b.woff2",
@@ -12,11 +12,11 @@
     "static/media/fa-v4compatibility.woff2": "/React-cocktails/static/media/fa-v4compatibility.1bac2991f3dbfa237aec.woff2",
     "static/media/ShakerIcon.svg": "/React-cocktails/static/media/ShakerIcon.4bcf9aa264b62f254a2e731ab9b0d0b4.svg",
     "index.html": "/React-cocktails/index.html",
-    "main.db35d3f1.css.map": "/React-cocktails/static/css/main.db35d3f1.css.map",
-    "main.2e035f0c.js.map": "/React-cocktails/static/js/main.2e035f0c.js.map"
+    "main.be61c9d6.css.map": "/React-cocktails/static/css/main.be61c9d6.css.map",
+    "main.4d10abf0.js.map": "/React-cocktails/static/js/main.4d10abf0.js.map"
   },
   "entrypoints": [
-    "static/css/main.db35d3f1.css",
-    "static/js/main.2e035f0c.js"
+    "static/css/main.be61c9d6.css",
+    "static/js/main.4d10abf0.js"
   ]
 }
