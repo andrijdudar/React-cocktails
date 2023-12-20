@@ -6,22 +6,27 @@ export function CocktailsList({ cocktailList, onDeleteCocktail }) {
     <div className='coctailContainer'>
       <h2>Додані коктейлі</h2>
 
-      <ol>
+      <div className="con is-flex is-flex-wrap-wrap">
         {cocktailList.map(cocktail => (
-          <li key={cocktail.id} className='coctailList'>
+          <div key={cocktail.id} className='coctailList'>
             <details className='btns coctailList__items'>
-              <summary className='is-flex is-justify-content-center'>
-                <h3 className='coctailList__item coctail_name'>{cocktail.cocktail_name}</h3>
+              <summary className='is-flex  is-justify-content-center'>
+                <div className='coctailList__item coctail_name'>
+
+                    <h3>{cocktail.cocktail_name || cocktail.nameCocktail}</h3>
+                  <img src={cocktail.img} alt={cocktail.nameCocktail} />
+                  {/* <img src={URL.createObjectURL(cocktail.img) ||cocktail.img} alt={cocktail.nameCocktail} /> */}
+                </div>
                 {/* <h3 className='coctailList__item'>&nbsp; &#8680; &nbsp;{cocktail.user}</h3> */}
               </summary>
-              <ul>
-                <li className='is-flex is-justify-content-space-between	' style={{ marginTop: '20px' }}>
-                  <div>id </div>
-                  <div>{cocktail.id}</div>
-                </li>
-                <hr />
+                <ul>
+                  <li className='is-flex is-justify-content-space-between	' style={{ marginTop: '20px' }}>
+                    <div>id </div>
+                    <div>{cocktail.id}</div>
+                  </li>
+                  <hr />
 
-                {/* <li className='is-flex is-justify-content-space-between'>
+                  {/* <li className='is-flex is-justify-content-space-between'>
                   <div>Приготування&nbsp;</div>
                   <div>{cocktail.cocktailPreparationMethod}</div>
                 </li>
@@ -42,39 +47,39 @@ export function CocktailsList({ cocktailList, onDeleteCocktail }) {
 
                 <hr /> */}
 
-                <li className='is-flex is-justify-content-space-between	'>
-                  Інгредієнти:
-                </li>
-                <hr />
-                {cocktail.ingredients.map(ingredient => (
-                  <div>
-                    <li key={ingredient.ingredient} className='is-flex is-justify-content-space-between	'>
-                      <div>{ingredient.ingredient}</div>
-                      <div>{ingredient.numberOfMilliliters} мл</div>
-                    </li>
-                  </div>
-                ))}
-                {/* <hr /> */}
-                {/* <li className='is-flex is-justify-content-space-between	'>
+                  <li className='is-flex is-justify-content-space-between	'>
+                    Інгредієнти:
+                  </li>
+                  <hr />
+                  {cocktail.ingredients.map(ingredient => (
+                    <div>
+                      <li key={ingredient.ingredient} className='is-flex is-justify-content-space-between	'>
+                        <div>{ingredient.ingredient}</div>
+                        <div>{ingredient.numberOfMilliliters} мл</div>
+                      </li>
+                    </div>
+                  ))}
+                  {/* <hr /> */}
+                  {/* <li className='is-flex is-justify-content-space-between	'>
                   Опис:
                   <br />
                   {cocktail.description}
                 </li> */}
-                <div className="btn_container">
-                  <button
-                    type="button"
-                    className='btn_dell btn btn_dell-coctail'
-                    onClick={() => onDeleteCocktail(cocktail.id)}
-                  >
-                    Видалити коктейль
-                  </button>
-                </div>
-              </ul>
+                  <div className="btn_container">
+                    <button
+                      type="button"
+                      className='btn_dell btn btn_dell-coctail'
+                      onClick={() => onDeleteCocktail(cocktail.id)}
+                    >
+                      Видалити коктейль
+                    </button>
+                  </div>
+                </ul>
             </details>
             {/* </div> */}
-          </li>
+          </div>
         ))}
-      </ol>
+      </div>
     </div>
   );
 }

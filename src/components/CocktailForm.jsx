@@ -16,6 +16,8 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   const [nameCocktail, setNameCocktail] = useState('');
   const [hesErrorNameCocktail, setHesErrorNameCocktail] = useState(false);
 
+  const [photo, setPhoto] = useState('');
+
   const [glas, setGlas] = useState('Посуд');
   const [hesErrorGlas, setHesErrorGlas] = useState(false);
 
@@ -39,26 +41,36 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
     setAuthor(event.target.value);
     setHesErrorAuthor(false);
   };
+
   const handleNameCocktailChange = (event) => {
     setNameCocktail(event.target.value);
     setHesErrorNameCocktail(false);
-
   };
+
+  const handlePhoto = (event) => {
+    const file = event.target.files && event.target.files[0];
+
+    if (file) {
+      setPhoto(file);
+      // Тут ви можете виконати додаткові дії з обраним файлом
+    }
+  };
+
   const handleGlasChange = (event) => {
     setGlas(event.target.value);
     setHesErrorGlas(false);
-
   };
+
   const handlePreparationChange = (event) => {
     setPreparation(event.target.value);
     setHesErrorPreparation(false);
-
   };
+
   const handleIceChange = (event) => {
     setIce(event.target.value);
     setHesErrorIce(false);
-
   };
+
   const handleIngredientsChange = (index, event) => {
     const { name, value } = event.target;
     const updatedIngredients = [...ingredients];
@@ -70,7 +82,6 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
     setHesErrorDescription(false);
-
   };
 
   //#endregion
@@ -95,6 +106,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
       "id": cocktailList.length + 1,
       "user": author,
       "nameCocktail": nameCocktail,
+      "img": URL.createObjectURL(photo),
       "glass": glas,
       "cocktailPreparationMethod": preparation,
       "ice": ice,
@@ -107,6 +119,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   const reset = () => {
     setAuthor('Автор');
     setNameCocktail('');
+    setPhoto('');
     setGlas('Посуд');
     setPreparation('Приготування');
     setIce('Лід');
@@ -146,8 +159,34 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
       });
 
       setHesErrorDescription(checkError(description));
-      return;
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! return;
     }
+
+    const cocktailData = makeCocktail();
+
+    // Відправте POST-запит на сервер
+    // fetch('https://ваш_сервер/api/cocktails', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(cocktailData),
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       setCocktailList([
+    //         ...cocktailList,
+    //         response,
+    //       ])
+    //       // Обробка успішної відповіді від сервера
+    //       // Наприклад, перенаправлення користувача на іншу сторінку
+    //     } else {
+    //       // Обробка помилок
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     // Обробка помилок мережі або інших помилок
+    //   });
 
     setCocktailList([
       ...cocktailList,
@@ -210,6 +249,33 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
             <p className='eror'>&#8593;! Як блядь коктейль називається !&#8593;</p>
           )}
         </div>
+
+        <div className="file is-medium is-boxed ">
+            <label className="file-label">
+              <input
+                className="file file-input"
+                type="file"
+                name="resume"
+                onChange={handlePhoto}
+                // hidden
+            />
+            {photo && (
+              <div>
+                {/* <p>Вибраний файл: {selectedFile.name}</p> */}
+                <img className='photo' src={URL.createObjectURL(photo)} alt="Картинка" />
+              </div>
+            )}
+            {!photo &&
+              <span className="file-cta">
+                <span className="file-icon">
+                  <i className="fas fa-upload"></i>
+                </span>
+                <span className="file-label">
+                  Фото
+                </span>
+              </span>}
+            </label>
+          </div>
 
         <div className={cn("control has-icons-left",
           { 'is-danger': hesErrorGlas })}>
@@ -287,7 +353,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
               )}
               <input
                 className={cn("input input-in collapse is-rounded",
-                  { 'is-danger': hesErrorIngredients && !input.ingredient})}
+                  { 'is-danger': hesErrorIngredients && !input.ingredient })}
                 type="text"
                 name="ingredient"
                 value={input.ingredient}
