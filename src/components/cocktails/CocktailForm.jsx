@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import '../components/CocktailForm.scss';
+import './CocktailForm.scss';
 
 import Icon from '@mdi/react';
 import { mdiGlassCocktail } from '@mdi/js';
-import shakerIcon from '../img/ShakerIcon.svg';
+import shakerIcon from '../../img/ShakerIcon.svg';
 import cn from 'classnames';
+import { SERVER_URL } from '../../services/httpClient';
+import { addCocktailServer, getCocktailsServer } from '../../utils/cocktail';
 
 
 export function CocktailForm({ cocktailList, setCocktailList }) {
@@ -102,12 +104,11 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   //#endregion
 
   const makeCocktail = () => {
-    console.log(photo);
     const cocktail = {
       "id": cocktailList.length + 1,
       "user": author,
       "nameCocktail": nameCocktail,
-      "img": photo,
+      "photo": photo,
       "glass": glas,
       "cocktailPreparationMethod": preparation,
       "ice": ice,
@@ -139,6 +140,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
 
   const hendleSubmit = (event) => {
     event.preventDefault();
+    const cocktail = makeCocktail();
 
     const checkError = (input, valuee) => {
       if (!input || input === valuee) {
@@ -160,41 +162,16 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
       });
 
       setHesErrorDescription(checkError(description));
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! return;
+      return;
     }
-
-    const cocktailData = makeCocktail();
-
-    // Відправте POST-запит на сервер
-    // fetch('https://ваш_сервер/api/cocktails', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(cocktailData),
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       setCocktailList([
-    //         ...cocktailList,
-    //         response,
-    //       ])
-    //       // Обробка успішної відповіді від сервера
-    //       // Наприклад, перенаправлення користувача на іншу сторінку
-    //     } else {
-    //       // Обробка помилок
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     // Обробка помилок мережі або інших помилок
-    //   });
-
     setCocktailList([
       ...cocktailList,
-      makeCocktail()
+      cocktail,
     ])
+    // Відправте POST-запит на сервер
+    addCocktailServer(cocktail);
 
-    reset()
+    reset();
   }
 
 
@@ -202,10 +179,10 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
     <form
       onSubmit={hendleSubmit}
       onReset={reset}
-      action="http://localhost:3000"
+      action={SERVER_URL}
       method="POST"
       className='container section is-flex is-flex
-    -direction-column'
+      -direction-column'
     >
       {/* Автор */}
       <div className={cn("control has-icons-left",
@@ -252,17 +229,16 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
         </div>
 
         <div className="file is-medium is-boxed ">
-            <label className="file-label">
-              <input
-                className="file file-input"
-                type="file"
-                name="resume"
-                onChange={handlePhoto}
-                // hidden
+          <label className="file-label">
+            <input
+              className="file file-input"
+              type="file"
+              name="resume"
+              onChange={handlePhoto}
+            // hidden
             />
             {photo && (
               <div>
-                {/* <p>Вибраний файл: {selectedFile.name}</p> */}
                 <img className='photo' src={URL.createObjectURL(photo)} alt="Картинка" />
               </div>
             )}
@@ -275,8 +251,8 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
                   Фото
                 </span>
               </span>}
-            </label>
-          </div>
+          </label>
+        </div>
 
         <div className={cn("control has-icons-left",
           { 'is-danger': hesErrorGlas })}>

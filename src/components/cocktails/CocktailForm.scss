@@ -76,13 +76,11 @@ select {
   background-color: #282c34;
   border: 2px solid whitesmoke;
   border-radius: 500px;
-  width: 40px;
   height: 40px;
-  padding: 8px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  width: 120px;
+  min-width: 120px;
 }
 
 .disabled {
