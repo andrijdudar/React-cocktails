@@ -1,11 +1,15 @@
 import { client } from '../services/httpClient';
 
-export const getPhotoServer = () => {
-  return client.get('/dishes');
+export const getDataServer = () => {
+  return client.get('/dishes/123');
 };
 
-export const addPhotoServer = (data) => {
-  return client.post('/dishes/str', data);
+export const addTextServer = (data) => {
+  return client.postText('/dishes/upload/', data);
+};
+
+export const addFileServer = (data) => {
+  return client.postFile('/dishes/upload/', data);
 };
 
 export const deletePhotoServer = (id) => {

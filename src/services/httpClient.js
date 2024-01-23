@@ -1,29 +1,42 @@
-export const SERVER_URL = 'https://4cf4-194-44-160-206.ngrok-free.app';
+export const SERVER_URL = 'https://a2af-46-119-118-70.ngrok-free.app/api';
 
 const handleResponse = (response) => {
   if (!response.ok) {
-    // alert('Дані з сервера не отримано');
+    console.log('Дані з сервера не отримано');
   }
-  // alert('Використовуються дані з сервера');
-  // console.log(response);
-  // return response.json();
-  return response;
+  return response.json();
+  // return response;
 }
 
 export const client = {
   get(url) {
-    return fetch(SERVER_URL + url)
+    return fetch(SERVER_URL + url, {
+      method: 'GET',
+    })
       .then(handleResponse)
   },
 
-  post(url, data) {
+  postText(url, data) {
     return fetch(SERVER_URL + url, {
       method: 'POST',
-      // body: JSON.stringify(data),
-      body: data,
-      // headers: {
-      //   'Content-Type': 'application/json; charset=utf-8',
-      // },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(handleResponse)
+  },
+
+  postFile(url, data) {
+    const formData = new FormData();
+    formData.append('photo', formData);
+    return fetch(SERVER_URL + url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: formData,
+
     })
       .then(handleResponse)
   },

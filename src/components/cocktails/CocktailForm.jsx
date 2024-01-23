@@ -6,7 +6,7 @@ import { mdiGlassCocktail } from '@mdi/js';
 import shakerIcon from '../../img/ShakerIcon.svg';
 import cn from 'classnames';
 import { SERVER_URL } from '../../services/httpClient';
-import { addCocktailServer, getCocktailsServer } from '../../utils/cocktail';
+import { addCocktailServer } from '../../utils/cocktail';
 
 
 export function CocktailForm({ cocktailList, setCocktailList }) {

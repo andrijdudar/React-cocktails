@@ -1,0 +1,28 @@
+.nav {
+  min-width: 100%;
+  max-width: 1280px;
+  color: white;
+  background-color: #282c34;
+  border-bottom: 2px solid red;
+}
+.burger{
+  color:white;
+  &:hover{
+    color: white;
+    transition: color 300ms;
+  }
+  &:focus{
+  color:white;
+    transition: color 300ms;
+  }
+}
+.burger-menu {
+  background-color: #282c34;
+  color: white;
+  opacity: 1;
+}
+.navbar-item,
+.navbar-link {
+  color: white;
+  /* color:red; */
+}

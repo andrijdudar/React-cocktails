@@ -1,102 +1,134 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cn from "classnames";
 import './TestPhoto.css';
-import { addPhotoServer, getPhotoServer } from "../utils/photo";
-import { SERVER_URL } from "../services/httpClient";
+import { addTextServer, addFileServer, getDataServer } from "../utils/photo";
+import getCocktailsFromServer from "../services/FirstGetServer";
 
 export const TestPhoto = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [photoFromServer, setPhotoFromServer] = useState(null);
-  const [loadingGet, setLoadingGet] = useState(false);
+  const dataToSend = { "message": "hello" };
 
-  const [errorGet, setErrorGet] = useState(false);
-  const [errorPost, setErrorPost] = useState(false);
-  const [postOk, setPostOk] = useState(false);
-
-
-  const getData = async () => {
-    // try {
-    //   const photo = await getPhotoServer();
-    //   setPhotoFromServer(photo);
-    //   console.log(photo);
-    // } catch (error) {
-    //   if (error.name !== 'AbortError') {
-    //     setErrorGet(true);
-    //     console.error('Помилка отримання фотографії з сервера:');
-    //   }
-    // }
-    getPhotoServer()
-      .then((photo) => {
-        setLoadingGet(true);
-        setTimeout(() => {
-          setLoadingGet(false);
-          setPhotoFromServer(photo);
-          console.log(photo);
-        }, 2000);
+  // #region states
+  // const [textServer, setTextServer] = useState(null);
+  // const [fileServer, setFileServer] = useState(null);
+  // const [loadingGet, setLoadingGet] = useState(false);
+  // const [postOk, setPostOk] = useState(false);
+  // const [errorGet, setErrorGet] = useState(false);
+  // const [errorPost, setErrorPost] = useState(false);
+  // #endregion
+  useEffect(() => {
+    getCocktailsFromServer()
+      .then((cocktailsFromServer) => {
+        selectedFile(cocktailsFromServer);
+        console.log(selectedFile); // Виведе оновлений список коктейлів
+        console.log(cocktailsFromServer);
       })
-      .catch(() => {
-        console.error('Помилка отримання фотографії з сервера:');
-        setLoadingGet(true);
-        setTimeout(() => {
-          setLoadingGet(false);
-          setErrorGet(true);
-          setTimeout(() => {
-            setErrorGet(false);
-          }, 3000);
-        }, 2000);
-      });
-  }
+      .catch(() => { })
+  }, []);
+
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
   };
+  const reset = () => {
+    setSelectedFile(null)
+  }
 
-  const hendleSubmit = (event) => {
-    event.preventDefault();
-    // if (selectedFile) {
-    //   try {
-    //     const formData = new FormData();
-    //     formData.append('image', selectedFile);
+  const hendleSubmitText = async (data) => {
+    try {
+      const response = await fetch('https://4d2c-46-119-118-70.ngrok-free.app/api/dishes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    //     await addPhotoServer(formData);
-    //     reset();
-    //   } catch (error) {
-    //     setErrorPost(true);
-    //     console.error('Помилка завантаження фотографії на сервер:');
-    //   }
-    // }
-
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-
-      addPhotoServer(formData)
-        .then(() => {
-          setPostOk(true);
-          setTimeout(() => {
-            setPostOk(false);
-          }, 3000);
-          reset();
-        })
-        .catch(() => {
-          console.error('Помилка завантаження фотографії на сервер:');
-          setErrorPost(true);
-          setTimeout(() => {
-            setErrorPost(false);
-            reset();
-          }, 3000);
-        });
+      if (response.ok) {
+        console.log('Data successfully sent to the server');
+      } else {
+        console.error('Failed to send data to the server');
+      }
+    } catch (error) {
+      console.error('Error while sending data:', error);
     }
   };
 
-  const reset = () => {
-    setSelectedFile(null);
+  const hendleSubmitFile = async (selectedFile) => {
+    try {
+      const formData = new FormData();
+      formData.append('photo', selectedFile);
+
+      const response = await fetch('https://5767-46-119-118-70.ngrok-free.app/api/dishes/uploadphoto/', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload image to the server');
+      }
+
+      console.log('Image uploaded successfully!');
+    } catch (error) {
+      console.error('Error uploading image to the server:', error.message);
+    }
   };
+
+  const getData = () => {
+    // getDataServer()
+    //   .then((data) => {
+    //     setLoadingGet(true);
+    //     setTimeout(() => {
+    //       setLoadingGet(false);
+    //       setphotoDataServer(data);
+    //       console.log(data);
+    //     }, 2000);
+    //   })
+    //   .catch(() => {
+    //     console.error('Помилка отримання фотографії з сервера:');
+    //     setLoadingGet(true);
+    //     setTimeout(() => {
+    //       setLoadingGet(false);
+    //       setErrorGet(true);
+    //       setTimeout(() => {
+    //         setErrorGet(false);
+    //       }, 3000);
+    //     }, 2000);
+    //   });
+  }
+
+  // const hendleSubmit = (event) => { //!сама перша функція з сетами і таймаутами
+  //   event.preventDefault();
+
+  //   if (selectedFile) {
+  //     const formData = new FormData();
+  //     formData.append('image', selectedFile.json());
+
+  //     addPhotoServer(formData)
+  //       .then(() => {
+  //         setPostOk(true);
+  //         setTimeout(() => {
+  //           setPostOk(false);
+  //         }, 3000);
+  //         reset();
+  //       })
+  //       .catch(() => {
+  //         console.error('Помилка завантаження фотографії на сервер:');
+  //         setErrorPost(true);
+  //         setTimeout(() => {
+  //           setErrorPost(false);
+  //           reset();
+  //         }, 3000);
+  //       });
+  //   }
+  // };
 
   return (
     <div className="container-photo">
-      {errorGet &&
+
+      {/* {errorGet &&
         <div class="alert alert-danger" role="alert">
           <p>Помилка отримання фотографії з сервера</p>
         </div>
@@ -110,13 +142,13 @@ export const TestPhoto = () => {
         <div class="alert alert-danger" role="alert">
           <p>Помилка завантаження фотографії на сервер</p>
         </div>
-      }
+      } */}
       <div className="test-photo">
         <form
-          onSubmit={hendleSubmit}
+          // onSubmit={hendleSubmit}
           onReset={reset}
-          action={SERVER_URL + '/dishes/add_photo'}
-          method="POST"
+          // action={SERVER_URL + '/dishes/add_photo'}
+          // method="POST"
           enctype="multipart/form-data"
         >
           <div className="file is-medium is-boxed ">
@@ -146,18 +178,19 @@ export const TestPhoto = () => {
             </label>
           </div>
 
-
           <div className="btn-container">
             <div className="control">
               <button
                 type='submit'
-                // className={"btn_done btn_add"
                 className={
                   cn('btn_done', 'btn_add', { 'btn-disableds': !selectedFile })
                 }
-                onClick={hendleSubmit}
+                onClick={() => {
+                  hendleSubmitFile(selectedFile)
+                  addFileServer(selectedFile)
+                }}// file
               >
-                Відправити
+                Відправити файл
               </button>
             </div>
 
@@ -173,23 +206,39 @@ export const TestPhoto = () => {
             </div>
           </div>
         </form>
+        <button
+          type='submit'
+          className='btn_done btn_add'
+          onClick={() => {
+            addTextServer(dataToSend)
+            hendleSubmitText(dataToSend)
+          }} //raw text
+        >
+          Відправити текст
+        </button>
         <div className="test-photo__result">
           <h1>Результат</h1>
           <div className="control">
             <button
               type='submit'
               className="btn_add btn_done"
-              onClick={getData}
+              onClick={() => {
+                // getData()
+                // getDataServer()
+                getCocktailsFromServer()
+              }}
             >
               Отримати фото з сервера
             </button>
           </div>
+          {/*
           {loadingGet && (
           <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         )}
-          {photoFromServer && (
-            <img className='photo' src={URL.createObjectURL(photoFromServer)} alt="Картинка" />
-          )}
+          {photoDataServer && (
+            <img className='photo' src={URL.createObjectURL(photoDataServer)} alt="Картинка" />
+          )} */}
+
         </div>
       </div>
     </div>
