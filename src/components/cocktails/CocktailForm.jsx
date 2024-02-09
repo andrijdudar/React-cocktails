@@ -6,7 +6,7 @@ import { mdiGlassCocktail } from '@mdi/js';
 import shakerIcon from '../../img/ShakerIcon.svg';
 import cn from 'classnames';
 import { SERVER_URL } from '../../services/httpClient';
-import { addCocktailServer } from '../../utils/cocktail';
+// import { addCocktailServer } from '../../utils/cocktail';
 
 
 export function CocktailForm({ cocktailList, setCocktailList }) {
@@ -103,19 +103,34 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
   };
   //#endregion
 
+  const joinIngredients = () => {
+    const ingredientsArr = ingredients.map((item) => {
+      return `${item.ingredient} - ${item.amount} мл`;
+    });
+    return ingredientsArr.join(', ');
+   };
   const makeCocktail = () => {
-    const cocktail = {
-      "id": cocktailList.length + 1,
-      "user": author,
-      "nameCocktail": nameCocktail,
-      "photo": photo,
-      "glass": glas,
-      "cocktailPreparationMethod": preparation,
-      "ice": ice,
-      "ingredients": [...ingredients],
-      "description": description
+    // const cocktail = {
+    //   "id": cocktailList.length + 1,
+    //   "user": author,
+    //   "nameCocktail": nameCocktail,
+    //   "photo": photo,
+    //   "glass": glas,
+    //   "cocktailPreparationMethod": preparation,
+    //   "ice": ice,
+    //   "ingredients": joinIngredients(),
+    //   "description": description
+    // }
+    const dish = {
+      // dish_name: str
+      // description: str
+      // ingredients: str
+      // tags: list[str]
+      // category: str(можна вибрати зі списку)
+      // price: int
+      // file: UploadFile = File()
     }
-    return cocktail;
+    return dish;
   };
 
   const reset = () => {
@@ -142,6 +157,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
     event.preventDefault();
     const cocktail = makeCocktail();
 
+    console.log(joinIngredients());
     const checkError = (input, valuee) => {
       if (!input || input === valuee) {
         return true;
@@ -169,7 +185,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
       cocktail,
     ])
     // Відправте POST-запит на сервер
-    addCocktailServer(cocktail);
+    // addCocktailServer(cocktail);
 
     reset();
   }
@@ -196,6 +212,7 @@ export function CocktailForm({ cocktailList, setCocktailList }) {
             <option>Плотніков Євген</option>
             <option>Дудар Андрій</option>
             <option>Пазяк Мар'ян</option>
+            <option>Класичний</option>
           </select>
           {hesErrorAuthor && (
             <p className='eror'>&#8593;! Автора не вибрано !&#8593;</p>

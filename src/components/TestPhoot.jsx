@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import cn from "classnames";
 import './TestPhoto.css';
-import { addTextServer, addFileServer, getDataServer } from "../utils/photo";
-import getCocktailsFromServer from "../services/FirstGetServer";
+import { addFileServer, addTextServer, getDataServer } from "../utils/photo";
+// import { SERVER_URL } from "../services/httpClient";
 
 export const TestPhoto = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const dataToSend = { "message": "hello" };
-
-  // #region states
-  // const [textServer, setTextServer] = useState(null);
-  // const [fileServer, setFileServer] = useState(null);
-  // const [loadingGet, setLoadingGet] = useState(false);
-  // const [postOk, setPostOk] = useState(false);
-  // const [errorGet, setErrorGet] = useState(false);
-  // const [errorPost, setErrorPost] = useState(false);
-  // #endregion
-  useEffect(() => {
-    getCocktailsFromServer()
-      .then((cocktailsFromServer) => {
-        selectedFile(cocktailsFromServer);
-        console.log(selectedFile); // Виведе оновлений список коктейлів
-        console.log(cocktailsFromServer);
-      })
-      .catch(() => { })
-  }, []);
-
-
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -36,47 +15,62 @@ export const TestPhoto = () => {
     setSelectedFile(null)
   }
 
-  const hendleSubmitText = async (data) => {
-    try {
-      const response = await fetch('https://4d2c-46-119-118-70.ngrok-free.app/api/dishes/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  ////#region
+  // useEffect(() => {
+  //   fetch(SERVER_URL, {
+  //     method: "get",
+  //     headers: new Headers({
+  //       "ngrok-skip-browser-warning": "69420",
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data))
+  //     .catch((err) => console.log(err));
+  // });
 
-      if (response.ok) {
-        console.log('Data successfully sent to the server');
-      } else {
-        console.error('Failed to send data to the server');
-      }
-    } catch (error) {
-      console.error('Error while sending data:', error);
-    }
-  };
 
-  const hendleSubmitFile = async (selectedFile) => {
-    try {
-      const formData = new FormData();
-      formData.append('photo', selectedFile);
 
-      const response = await fetch('https://5767-46-119-118-70.ngrok-free.app/api/dishes/uploadphoto/', {
-        method: 'POST',
-        body: formData,
-      });
+  // const hendleSubmitText = async (data) => {
+  //   try {
+  //     const response = await fetch('https://4d2c-46-119-118-70.ngrok-free.app/api/dishes/', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Failed to upload image to the server');
-      }
+  //     if (response.ok) {
+  //       console.log('Data successfully sent to the server');
+  //     } else {
+  //       console.error('Failed to send data to the server');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error while sending data:', error);
+  //   }
+  // };
 
-      console.log('Image uploaded successfully!');
-    } catch (error) {
-      console.error('Error uploading image to the server:', error.message);
-    }
-  };
+  // const hendleSubmitFile = async (selectedFile) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('file', selectedFile);
 
-  const getData = () => {
+  //     const response = await fetch('https://d088-46-119-118-70.ngrok-free.app/api/dishes/add_photo/', {
+  //       method: 'POST',
+  //       body: formData,
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error('Failed to upload image to the server');
+  //     }
+
+  //     console.log('Image uploaded successfully!');
+  //   } catch (error) {
+  //     console.error('Error uploading image to the server:', error.message);
+  //   }
+  // };
+
+  // const getData = () => {
     // getDataServer()
     //   .then((data) => {
     //     setLoadingGet(true);
@@ -97,7 +91,7 @@ export const TestPhoto = () => {
     //       }, 3000);
     //     }, 2000);
     //   });
-  }
+  // }
 
   // const hendleSubmit = (event) => { //!сама перша функція з сетами і таймаутами
   //   event.preventDefault();
@@ -125,6 +119,76 @@ export const TestPhoto = () => {
   //   }
   // };
 
+
+  // const hendleSubmitFile = async (e) => {
+  //   e.preventDefault();
+  //   // addFileServer(selectedFile);
+  //   const formData = new FormData();
+  //   formData.append('file', selectedFile);
+
+  //   try {
+  //     const response = await fetch('https://9ef2-46-119-118-70.ngrok-free.app/api/dishes/add_photo/', {
+  //       method: 'POST',
+  //       body: formData,
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.json();
+  //       console.log(result);
+  //     } else {
+  //       console.error('Failed to upload image');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error during upload:', error);
+  //   }
+  // };
+
+// const hendleSubmitFile = (e) => {
+//   e.preventDefault();
+//   const formData = new FormData();
+//   formData.append('file', selectedFile);
+
+//   fetch('https://9ef2-46-119-118-70.ngrok-free.app/api/dishes/add_photo/', {
+//     method: 'POST',
+//     body: formData,
+//   })
+//     .then((response) => {
+//       if (response.ok) {
+//         const result =  response.json();
+//         console.log(result);
+//       } else {
+//         console.error('Failed to upload image');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('Error during upload:', error);
+//     })
+// };
+
+  // const hendleSubmitFile = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('file', selectedFile);
+
+  //   fetch('https://9ef2-46-119-118-70.ngrok-free.app/api/dishes/add_photo/', {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       } else {
+  //         console.error('Failed to upload image');
+  //       }
+  //     })
+  //     .then((result) => {
+  //       console.log(result); // Тут виводимо результат
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error during upload:', error);
+  //     });
+  // };
+////#endregion
   return (
     <div className="container-photo">
 
@@ -149,7 +213,7 @@ export const TestPhoto = () => {
           onReset={reset}
           // action={SERVER_URL + '/dishes/add_photo'}
           // method="POST"
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
         >
           <div className="file is-medium is-boxed ">
             <label className="file-label">
@@ -161,7 +225,6 @@ export const TestPhoto = () => {
               />
               {selectedFile && (
                 <div>
-                  {/* <p>Вибраний файл: {selectedFile.name}</p> */}
                   <img className='photo' src={URL.createObjectURL(selectedFile)} alt="Картинка" />
                 </div>
               )}
@@ -181,14 +244,11 @@ export const TestPhoto = () => {
           <div className="btn-container">
             <div className="control">
               <button
-                type='submit'
+                type='button'
                 className={
                   cn('btn_done', 'btn_add', { 'btn-disableds': !selectedFile })
                 }
-                onClick={() => {
-                  hendleSubmitFile(selectedFile)
-                  addFileServer(selectedFile)
-                }}// file
+                onClick={() => addFileServer(selectedFile)}
               >
                 Відправити файл
               </button>
@@ -210,9 +270,8 @@ export const TestPhoto = () => {
           type='submit'
           className='btn_done btn_add'
           onClick={() => {
-            addTextServer(dataToSend)
-            hendleSubmitText(dataToSend)
-          }} //raw text
+            addTextServer('text')
+          }}
         >
           Відправити текст
         </button>
@@ -223,9 +282,7 @@ export const TestPhoto = () => {
               type='submit'
               className="btn_add btn_done"
               onClick={() => {
-                // getData()
-                // getDataServer()
-                getCocktailsFromServer()
+                getDataServer()
               }}
             >
               Отримати фото з сервера

@@ -1,0 +1,120 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+}
+
+.menuCards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  gap: 40px;
+  grid-area: cards;
+  height: 100vh;
+  overflow-y: auto;
+  border-radius: 25px;
+}
+
+.container {
+  width: 350px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  height: max-content;
+  border-radius: 25px;
+}
+
+header {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  height: 350px;
+  background: center / cover;
+  /* background-image: url(https://3.bp.blogspot.com/-v7vHC8w2AKs/TbbD-X8BhTI/AAAAAAAAAJ4/LCcrwIaMgf0/s1600/Mint+Julep+glass+tools.jpg); */
+}
+.img-none {
+  height: 55px;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  font-size: 2rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 0px;
+  color: white;
+
+}
+
+.container.closed .title {
+  padding: 40px 20px 10px 20px;
+  margin-top: -87px;
+  color: white;
+  border: none;
+}
+
+.title:before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+  opacity: 0;
+}
+
+.container.closed .title:before {
+  opacity: 1;
+}
+
+article {
+  padding: 25px 30px;
+  overflow: hidden;
+  max-height: max-content;
+  background: white;
+}
+
+.container.closed article {
+  max-height: 0px;
+  padding: 0 30px;
+}
+
+.ingredients {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 20px;
+  padding-left: 4px;
+  font-size: 0.9rem;
+  color: #1976D2;
+}
+
+.ingredients>li {
+  list-style-type: none;
+  display: flex;
+  margin: 4px 0px;
+}
+
+.ingredients>li>.amount {
+  width: 80px;
+  color: #1976D2;
+}
+
+.description {
+  margin-bottom: 10px;
+  color: #1976D2;
+}
+
+.is-hover:hover{
+    box-shadow: 2px 2px 5px black;
+}
+hr {
+  margin: 0 0 14px 0;
+
+}

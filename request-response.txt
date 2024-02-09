@@ -1,0 +1,293 @@
+Запити:
+
+GET  # запит на отримання інформації
+
+    url/api/dishes/{id} # {id} - id конкретного обєкту
+        відповідь:   # status-code 200
+            {
+                "id":int,
+                "image_url":str,
+                "image_public_id":str,
+                "dish_name":str,
+                "description":str,
+                "ingredients":str,
+                "user_id":int | null,
+                "first_name":str | null,
+                "tags":[
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    ...
+                        ],
+                "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                "updated_at":datetime | str | null,
+                "stop_list":Bool,
+                "category_name":null,
+                "category_id":int
+            }
+    url/api/dishes/ # отримати всі обєкти dishes
+        відпрвідь:  # status-code 200
+            [
+                {
+                    "id":int,
+                    "image_url":str,
+                    "image_public_id":str,
+                    "dish_name":str,
+                    "description":str,
+                    "ingredients":str,
+                    "user_id":int | null,
+                    "first_name":str | null,
+                    "tags":[
+                        {
+                            "id":int,
+                            "name_tag":str
+                        },
+                        {
+                            "id":int,
+                            "name_tag":str
+                        },
+                        ...
+                            ],
+                    "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                    "updated_at":datetime | str | null,
+                    "stop_list":Bool,
+                    "category_name":null,
+                    "category_id":int
+                },
+                ...
+            ]
+    url/api/categories/ # отримати всі обєкти categories
+        відпрвідь:  # status-code 200
+            [
+                {
+                    "id": int,
+                    "name": str,
+                    "parent_id":int | null
+                },
+                ...
+            ]
+    url/api/tags/ # отримати всі обєкти tags
+        відпрвідь:   # status-code 200
+            [
+                {
+                    "id": int,
+                    "name_tag": str
+                },
+                ...
+            ]
+    url/api/categories/get_dishes/{id} # отримати всі обєкти dishes які     належать конкретній категорії
+                                        # {id} - id категорії
+            відповідь: # status-code 200 OK
+            [
+                {
+                    "id":int,
+                    "image_url":str,
+                    "image_public_id":str,
+                    "dish_name":str,
+                    "description":str,
+                    "ingredients":str,
+                    "user_id":int | null,
+                    "first_name":str | null,
+                    "tags":[
+                        {
+                            "id":int,
+                            "name_tag":str
+                        },
+                        {
+                            "id":int,
+                            "name_tag":str
+                        },
+                        ...
+                            ],
+                    "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                    "updated_at":datetime | str | null,
+                    "stop_list":Bool,
+                    "category_name":null,
+                    "category_id":int
+                },
+                ...
+            ]
+
+POST  # запит на створення нового обєкту
+    url/api/dishes/create_new_dish     # form-data
+        запит:
+            name: str
+            description: str
+            ingredients: str
+            tags: str
+            category: str
+            price: int
+            file: File # безпосередньо фотка
+        відпрвідь:   # status-code 201 Crрeated - повертає новостворений обєкт
+            {
+                "id":int,
+                "image_url":str,
+                "image_public_id":str,
+                "dish_name":str,
+                "description":str,
+                "ingredients":str,
+                "user_id":int | null,
+                "first_name":str | null,
+                "tags":[
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    ...
+                        ],
+                "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                "updated_at":datetime | str | null,
+                "stop_list":Bool,
+                "category_name":null,
+                "category_id":int
+            }
+
+    url/api/categories/add_category     # raw
+        запит:
+            {
+                "name": str,
+                "parent": str   # назва категорії для якої цей обєкт буде підкатегорією
+            }
+
+        відпрвідь:  # status-code 201 Crрeated - повертає новостворений обєкт
+            {
+                "id": int,
+                "name": str,
+                "parent_id":int | null
+            }
+
+PUT # запит щоб замінити існуюсий обєкт на новий з тим самим id
+    url/api/dishes/update   #form-data
+        запит:
+            id: int
+            name: str
+            description: str
+            ingredients: str
+            tags: str
+            category: str
+            price: int
+            file: File # безпосередньо фотка
+        відпрвідь:   # status-code 202 Accepted - повертає оновлений обєкт
+            {
+                "id":int,
+                "image_url":str,
+                "image_public_id":str,
+                "dish_name":str,
+                "description":str,
+                "ingredients":str,
+                "user_id":int | null,
+                "first_name":str | null,
+                "tags":[
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    ...
+                        ],
+                "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                "updated_at":datetime | str | null,
+                "stop_list":Bool,
+                "category_name":null,
+                "category_id":int
+            }
+
+PATCH   # запит щоб змінити в існуюючому обєкті якісь поля
+    url/api/dishes/update_photo  # form-data
+        запит:
+            id: int
+            file: File # безпосередньо фотка
+        відповідь:  # status-code 202 Accepted - повертає оновлений обєкт
+            {
+                "id":int,
+                "image_url":str,
+                "image_public_id":str,
+                "dish_name":str,
+                "description":str,
+                "ingredients":str,
+                "user_id":int | null,
+                "first_name":str | null,
+                "tags":[
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    ...
+                        ],
+                "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                "updated_at":datetime | str | null,
+                "stop_list":Bool,
+                "category_name":null,
+                "category_id":int
+            }
+    url/api/dishes/patch  # raw
+         запит:
+            {
+                id: int
+                name: str | null
+                description: str | null
+                ingredients: str | null
+                tags: str | null
+                category: str | null
+                price: int | null
+            }
+            # поле id обовязкове, інші поля ні
+            # наприклад якщо я потрібно змінити ціну
+            # то запит буде таким:
+            {
+                "id": "330",
+                "price": 300
+            }
+        відповідь:   # status-code 202 Accepted - повертає оновлений обєкт
+            {
+                "id":int,
+                "image_url":str,
+                "image_public_id":str,
+                "dish_name":str,
+                "description":str,
+                "ingredients":str,
+                "user_id":int | null,
+                "first_name":str | null,
+                "tags":[
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    {
+                        "id":int,
+                        "name_tag":str
+                    },
+                    ...
+                        ],
+                "created_at":datetime | str, # у мене це тип даних - "2024-01-20T12:20:10.289813"
+                "updated_at":datetime | str | null,
+                "stop_list":Bool,
+                "category_name":null,
+                "category_id":int
+            }
+
+DELETE  # запит який видаляє обєкт
+    url/api/dishes/delete/{id}  # видалення страви # {id} - id конкретного обєкту
+        відпрвідь:  # status-code 204 No Content
+
+    url/api/categories/delete/{id}  # видалення категорії # {id} - id конкретного обєкту
+        відпрвідь:  # status-code 204 No Content
+
+    url/api/tags/delete/{id}  # видалення тегу # {id} - id конкретного обєкту
+        відпрвідь:  # status-code 204 No Content

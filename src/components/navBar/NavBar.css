@@ -1,28 +1,35 @@
+
+
 .nav {
-  min-width: 100%;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  position: fixed;
+  width: 100%;
   max-width: 1280px;
+  margin: 0 auto;
   color: white;
   background-color: #282c34;
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid black;
+  box-shadow: 1px 3px 1px rgb(57 57 57);
+  font-size: 14px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
-.burger{
-  color:white;
-  &:hover{
-    color: white;
-    transition: color 300ms;
-  }
-  &:focus{
-  color:white;
-    transition: color 300ms;
-  }
+.nav-h {
+    display: flex;
+  justify-content: space-between;
+  padding:5px 60px 1px;
 }
-.burger-menu {
+
+
+.logo-img {
+  /* margin: 3px 0 0 30px; */
+  height: 60px;
   background-color: #282c34;
-  color: white;
-  opacity: 1;
+  cursor: pointer;
 }
-.navbar-item,
-.navbar-link {
-  color: white;
-  /* color:red; */
-}
+
+
+

@@ -1,10 +1,18 @@
 .container {
+  overflow-y: auto;
+  height: 100vh;
+  background-color: #282c34;
+}
+
+.form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 30px;
   padding: 0 auto;
+  background-color: #282c34;
+
 }
 .control {
   gap: 40px;
@@ -22,11 +30,6 @@ select {
   width: 300px;
 }
 
-.input {
-  width: 100%;
-  height: 50px;
-
-}
 
 .input-ml {
   width: 65px;
@@ -66,8 +69,9 @@ select {
 }
 .btn-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
+  margin-bottom: 50px;
 }
 
 .btn_cencel,
@@ -88,9 +92,8 @@ select {
   cursor: auto;
 }
 
-.is-danger {
+.is-danger-btn {
   border: 2px solid red;
-  border-radius: 40px;
   box-shadow: 2px 2px 5px red;
 }
 
@@ -108,10 +111,18 @@ font-size: 16px;
   border-radius: 40px;
 }
 
-.icon {
-  color: red;
-  padding-left: 10px;
-  padding-top: 6px;
+.btn {
+  color: white;
+  background-color: #282c34;
+  border: 2px solid whitesmoke;
+  border-radius: 500px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
 }
 
 .btn_add:hover {
