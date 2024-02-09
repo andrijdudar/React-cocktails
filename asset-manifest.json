@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/React-cocktails/static/css/main.f3747049.css",
-    "main.js": "/React-cocktails/static/js/main.363dcaca.js",
+    "main.css": "/React-cocktails/static/css/main.0211582a.css",
+    "main.js": "/React-cocktails/static/js/main.bc00efd9.js",
     "static/media/fa-solid-900.ttf": "/React-cocktails/static/media/fa-solid-900.d75e3fd1eb12e9bd6655.ttf",
     "static/media/fa-brands-400.ttf": "/React-cocktails/static/media/fa-brands-400.016b4a6cdced82ab3aa1.ttf",
     "static/media/fa-solid-900.woff2": "/React-cocktails/static/media/fa-solid-900.b6879d41b0852f01ed5b.woff2",
     "static/media/fa-brands-400.woff2": "/React-cocktails/static/media/fa-brands-400.878f31251d960bd6266f.woff2",
     "static/media/fa-regular-400.ttf": "/React-cocktails/static/media/fa-regular-400.50701fbb8177c2dde530.ttf",
     "static/media/fa-regular-400.woff2": "/React-cocktails/static/media/fa-regular-400.b041b1fa4fe241b23445.woff2",
+    "static/media/DB2.svg": "/React-cocktails/static/media/DB2.ef5d57c8fb5561921f62ce574d33dc41.svg",
     "static/media/fa-v4compatibility.ttf": "/React-cocktails/static/media/fa-v4compatibility.c6a0c95b0a95c4553700.ttf",
     "static/media/fa-v4compatibility.woff2": "/React-cocktails/static/media/fa-v4compatibility.1bac2991f3dbfa237aec.woff2",
     "static/media/ShakerIcon.svg": "/React-cocktails/static/media/ShakerIcon.4bcf9aa264b62f254a2e731ab9b0d0b4.svg",
     "index.html": "/React-cocktails/index.html",
-    "main.f3747049.css.map": "/React-cocktails/static/css/main.f3747049.css.map",
-    "main.363dcaca.js.map": "/React-cocktails/static/js/main.363dcaca.js.map"
+    "main.0211582a.css.map": "/React-cocktails/static/css/main.0211582a.css.map",
+    "main.bc00efd9.js.map": "/React-cocktails/static/js/main.bc00efd9.js.map"
   },
   "entrypoints": [
-    "static/css/main.f3747049.css",
-    "static/js/main.363dcaca.js"
+    "static/css/main.0211582a.css",
+    "static/js/main.bc00efd9.js"
   ]
 }
